@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>树懒老K AI技能海报</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #e8eef5;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.poster {
+  width: 420px;
+  background: linear-gradient(170deg, #f6f9fc 0%, #eaf0f7 30%, #f0f5fa 70%, #f4f8fb 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(70,120,160,0.12), 0 2px 8px rgba(70,120,160,0.06);
+  position: relative;
+  border: 1px solid rgba(70,120,160,0.08);
+}
+.poster::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 15%, rgba(74,136,176,0.06) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 40px 30px 24px;
+  position: relative;
+}
+.avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  border: 3px solid rgba(74,136,176,0.2);
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(74,136,176,0.12);
+}
+.brand-name {
+  font-size: 14px;
+  color: #4a80a8;
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+}
+.main-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2a3e50;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.sub-title {
+  font-size: 13px;
+  color: #7a92a8;
+  letter-spacing: 1px;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  margin: 0 30px;
+  background: linear-gradient(90deg, transparent, rgba(74,136,176,0.2), transparent);
+}
+
+/* Skill Cards */
+.skills { padding: 24px 24px 16px; }
+.skill-card {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(74,136,176,0.1);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  backdrop-filter: blur(4px);
+}
+.skill-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(74,136,176,0.1);
+  border-color: rgba(74,136,176,0.2);
+}
+.skill-icon {
+  font-size: 20px;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+.skill-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2a3e50;
+  margin-bottom: 8px;
+}
+.skill-audience {
+  font-size: 11px;
+  color: #4a80a8;
+  margin-bottom: 8px;
+  padding: 4px 10px;
+  background: rgba(74,136,176,0.08);
+  border-radius: 20px;
+  display: inline-block;
+}
+.skill-pain {
+  font-size: 12px;
+  color: #6a8298;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+.skill-features {
+  font-size: 12px;
+  color: #3a5a70;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.skill-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.skill-links a {
+  font-size: 11px;
+  color: #4a80a8;
+  text-decoration: none;
+  padding: 5px 12px;
+  border: 1px solid rgba(74,136,176,0.25);
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+.skill-links a:hover {
+  background: rgba(74,136,176,0.1);
+  border-color: rgba(74,136,176,0.4);
+  color: #3a6a8a;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px 30px 36px;
+  position: relative;
+}
+.qrcode-hint {
+  font-size: 11px;
+  color: #7a92a8;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+.slogan {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4a80a8;
+  letter-spacing: 6px;
+  margin-bottom: 8px;
+}
+.footer-brand {
+  font-size: 12px;
+  color: #7a92a8;
+  letter-spacing: 2px;
+}
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  color: #4a80a8;
+  border: 1px solid rgba(74,136,176,0.25);
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-top: 12px;
+  letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+
+<div class="poster">
+  <!-- Header -->
+  <div class="header">
+    <img src="sloth-avatar.jpg" alt="树懒老K" class="avatar" onerror="this.style.display='none'">
+    <div class="brand-name">树 懒 老 K</div>
+    <div class="main-title">AI 智能体技能矩阵</div>
+    <div class="sub-title">覆盖 B2B 企业从战略到落地的关键岗位</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Skills -->
+  <div class="skills">
+
+    <!-- CPQ -->
+    <div class="skill-card">
+      <span class="skill-icon">🔧</span>
+      <div class="skill-name">智能报价助手</div>
+      <span class="skill-audience">金蝶制造业售前/实施顾问 | 装备制造企业销售工程师</span>
+      <div class="skill-pain">痛点：报价慢、成本拆不透、交期拍脑袋、版本改到乱</div>
+      <div class="skill-features">一句话输入需求自动提取参数，逐层穿透成本结构，交叉验证交期约束，扫描合同风险，一次输出多套报价方案含利润率与风险等级</div>
+      <div class="skill-links">
+        <a href="https://weixin.qq.com/sph/ACutJK6Xf" target="_blank">观看演示</a>
+        <a href="https://github.com/wangguobao0215/Sloth-CPQ-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <!-- PSC -->
+    <div class="skill-card">
+      <span class="skill-icon">📋</span>
+      <div class="skill-name">售前顾问助理</div>
+      <span class="skill-audience">金蝶售前解决方案顾问 | B2B企业售前团队</span>
+      <div class="skill-pain">痛点：纪要整理耗时、提纲临时拼凑、竞品缺维度、方案经不起追问</div>
+      <div class="skill-features">会议笔记秒变战情分析，自动生成分层调研提纲和钩子问题，竞对作战简报含三级攻防话术，认知挑战引擎做盲区扫描和压力测试</div>
+      <div class="skill-links">
+        <a href="https://weixin.qq.com/sph/AmJyA2p8y" target="_blank">观看演示</a>
+        <a href="https://github.com/wangguobao0215/Sloth-PSC-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <!-- Sales -->
+    <div class="skill-card">
+      <span class="skill-icon">💼</span>
+      <div class="skill-name">B2B销售智能助理</div>
+      <span class="skill-audience">金蝶一线销售及管理者 | B2B企业销售团队</span>
+      <div class="skill-pain">痛点：客户信息散落、跟进靠记忆、商机卡点不清、赢单输单没复盘</div>
+      <div class="skill-features">22+项能力覆盖完整销售周期，多平台挖掘客户自动补全画像，一句话记录活动智能更新漏斗，商机健康度五维评分低分自动预警</div>
+      <div class="skill-links">
+        <a href="https://weixin.qq.com/sph/A2kjExhTx" target="_blank">观看演示</a>
+        <a href="https://github.com/wangguobao0215/Sloth-Sales-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <!-- StratAlign -->
+    <div class="skill-card">
+      <span class="skill-icon">🗺️</span>
+      <div class="skill-name">战略对齐引擎</div>
+      <span class="skill-audience">金蝶战略咨询/数字化转型团队 | 企业CIO/CTO/CDO</span>
+      <div class="skill-pain">痛点：战略落不了地、投资散弹打鸟、AI场景选择无量化依据</div>
+      <div class="skill-features">愿景拆解为BSC四维目标并检测矛盾，扫描业务瓶颈，三维评分筛选最高价值AI场景，生成带ROI的投资组合路线图，预算变化秒级重排</div>
+      <div class="skill-links">
+        <a href="https://weixin.qq.com/sph/ADQSKQANT" target="_blank">观看演示</a>
+        <a href="https://github.com/wangguobao0215/Sloth-StratAlign-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="qrcode-hint">全部开源 · 欢迎 Star & Issue</div>
+    <div class="slogan">慢一点，深一度</div>
+    <div class="footer-brand">Powered by QoderWork</div>
+    <div class="badge">OPEN SOURCE</div>
+  </div>
+</div>
+
+</body>
+</html>
