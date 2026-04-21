@@ -14,7 +14,7 @@ body {
   padding: 20px;
 }
 .poster {
-  width: 420px;
+  width: 440px;
   background: linear-gradient(170deg, #f6f9fc 0%, #eaf0f7 30%, #f0f5fa 70%, #f4f8fb 100%);
   border-radius: 24px;
   overflow: hidden;
@@ -26,40 +26,50 @@ body {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(ellipse at 50% 15%, rgba(74,136,176,0.06) 0%, transparent 55%);
+  background: radial-gradient(ellipse at 50% 10%, rgba(74,136,176,0.06) 0%, transparent 55%);
   pointer-events: none;
 }
 
 /* Header */
 .header {
   text-align: center;
-  padding: 40px 30px 24px;
+  padding: 36px 30px 22px;
   position: relative;
 }
 .avatar {
-  width: 72px; height: 72px;
+  width: 68px; height: 68px;
   border-radius: 50%;
   border: 3px solid rgba(74,136,176,0.2);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   box-shadow: 0 4px 16px rgba(74,136,176,0.12);
 }
 .brand-name {
-  font-size: 14px;
+  font-size: 13px;
   color: #4a80a8;
   letter-spacing: 4px;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
 .main-title {
-  font-size: 24px;
+  font-size: 23px;
   font-weight: 700;
   color: #2a3e50;
   line-height: 1.4;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 .sub-title {
-  font-size: 13px;
+  font-size: 12px;
   color: #7a92a8;
   letter-spacing: 1px;
+}
+.skill-count {
+  display: inline-block;
+  font-size: 11px;
+  color: #4a80a8;
+  background: rgba(74,136,176,0.08);
+  border-radius: 20px;
+  padding: 3px 12px;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
 }
 
 /* Divider */
@@ -69,14 +79,44 @@ body {
   background: linear-gradient(90deg, transparent, rgba(74,136,176,0.2), transparent);
 }
 
+/* Section Header */
+.section-header {
+  padding: 20px 24px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-icon { font-size: 16px; }
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2a3e50;
+  letter-spacing: 1px;
+}
+.section-badge {
+  font-size: 9px;
+  color: #fff;
+  background: linear-gradient(135deg, #4a80a8, #5b9ab8);
+  border-radius: 4px;
+  padding: 2px 6px;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+.section-sub {
+  font-size: 11px;
+  color: #8a9eb2;
+  padding: 0 24px 6px;
+  letter-spacing: 0.5px;
+}
+
 /* Skill Cards */
-.skills { padding: 24px 24px 16px; }
+.skills { padding: 6px 20px 12px; }
 .skill-card {
   background: rgba(255,255,255,0.7);
   border: 1px solid rgba(74,136,176,0.1);
   border-radius: 14px;
-  padding: 20px;
-  margin-bottom: 16px;
+  padding: 18px;
+  margin-bottom: 14px;
   position: relative;
   transition: transform 0.2s, box-shadow 0.2s;
   backdrop-filter: blur(4px);
@@ -86,48 +126,114 @@ body {
   box-shadow: 0 6px 20px rgba(74,136,176,0.1);
   border-color: rgba(74,136,176,0.2);
 }
-.skill-icon {
-  font-size: 20px;
-  margin-bottom: 8px;
-  display: inline-block;
+.skill-card:last-child { margin-bottom: 0; }
+.skill-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
 }
+.skill-icon { font-size: 18px; }
 .skill-name {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: #2a3e50;
-  margin-bottom: 8px;
+}
+.new-tag {
+  font-size: 9px;
+  color: #fff;
+  background: linear-gradient(135deg, #5A9E8F, #4a8a7e);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-left: auto;
 }
 .skill-audience {
-  font-size: 11px;
+  font-size: 10.5px;
   color: #4a80a8;
   margin-bottom: 8px;
-  padding: 4px 10px;
+  padding: 3px 9px;
   background: rgba(74,136,176,0.08);
   border-radius: 20px;
   display: inline-block;
+  line-height: 1.5;
 }
 .skill-pain {
-  font-size: 12px;
+  font-size: 11.5px;
   color: #6a8298;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   line-height: 1.6;
 }
 .skill-features {
-  font-size: 12px;
+  font-size: 11.5px;
   color: #3a5a70;
   line-height: 1.7;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
+
+/* Version & Changelog Block */
+.skill-changelog {
+  background: rgba(74,136,176,0.05);
+  border: 1px solid rgba(74,136,176,0.1);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+.changelog-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.changelog-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #4a80a8;
+  letter-spacing: 0.5px;
+}
+.version-tag {
+  font-size: 9px;
+  color: #5A9E8F;
+  border: 1px solid rgba(90,158,143,0.3);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-weight: 500;
+}
+.beta-tag {
+  color: #8E8B6A;
+  border-color: rgba(142,139,106,0.3);
+}
+.major-tag {
+  color: #fff;
+  background: linear-gradient(135deg, #5A9E8F, #4a8a7e);
+  border: none;
+}
+.changelog-items {
+  font-size: 10.5px;
+  color: #4a6a80;
+  line-height: 1.7;
+}
+.changelog-items span {
+  display: block;
+}
+.changelog-items span::before {
+  content: '▸ ';
+  color: #7EA6C4;
+  font-size: 9px;
+}
+
+/* Links */
 .skill-links {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 .skill-links a {
-  font-size: 11px;
+  font-size: 10.5px;
   color: #4a80a8;
   text-decoration: none;
-  padding: 5px 12px;
+  padding: 4px 11px;
   border: 1px solid rgba(74,136,176,0.25);
   border-radius: 20px;
   transition: all 0.2s;
@@ -141,13 +247,13 @@ body {
 /* Footer */
 .footer {
   text-align: center;
-  padding: 20px 30px 36px;
+  padding: 18px 30px 32px;
   position: relative;
 }
 .qrcode-hint {
   font-size: 11px;
   color: #7a92a8;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   letter-spacing: 1px;
 }
 .slogan {
@@ -155,21 +261,21 @@ body {
   font-weight: 700;
   color: #4a80a8;
   letter-spacing: 6px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .footer-brand {
-  font-size: 12px;
+  font-size: 11px;
   color: #7a92a8;
   letter-spacing: 2px;
 }
 .badge {
   display: inline-block;
-  font-size: 10px;
+  font-size: 9px;
   color: #4a80a8;
   border: 1px solid rgba(74,136,176,0.25);
   border-radius: 4px;
   padding: 2px 6px;
-  margin-top: 12px;
+  margin-top: 10px;
   letter-spacing: 1px;
 }
 </style>
@@ -183,59 +289,158 @@ body {
     <div class="brand-name">树 懒 老 K</div>
     <div class="main-title">AI 智能体技能矩阵</div>
     <div class="sub-title">覆盖 B2B 企业从战略到落地的关键岗位</div>
+    <div class="skill-count">6 项技能 · 持续迭代中</div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- Skills -->
+  <!-- ==================== Section 1: New Skill ==================== -->
+  <div class="section-header">
+    <span class="section-icon">✦</span>
+    <span class="section-title">新增技能</span>
+    <span class="section-badge">NEW</span>
+  </div>
+  <div class="section-sub">制造业产销协同场景，从排产到交付的决策参谋</div>
+
   <div class="skills">
 
-    <!-- CPQ -->
+    <!-- ProdSync -->
     <div class="skill-card">
-      <span class="skill-icon">🔧</span>
-      <div class="skill-name">智能报价助手</div>
-      <span class="skill-audience">金蝶制造业售前/实施顾问 | 装备制造企业销售工程师</span>
-      <div class="skill-pain">痛点：报价慢、成本拆不透、交期拍脑袋、版本改到乱</div>
-      <div class="skill-features">一句话输入需求自动提取参数，逐层穿透成本结构，交叉验证交期约束，扫描合同风险，一次输出多套报价方案含利润率与风险等级</div>
+      <div class="skill-top">
+        <span class="skill-icon">🏭</span>
+        <div class="skill-name">产销协同智能副驾</div>
+        <span class="new-tag">NEW</span>
+      </div>
+      <span class="skill-audience">计划经理 | 车间计划员 | 快消品肉制品行业</span>
+      <div class="skill-pain">痛点：插单影响评不清、联产品平衡算不准、排产调整全靠经验、多场景对比无量化</div>
+      <div class="skill-features">十一项约束满足引擎（含DAG五层级联传导），370+可配企业参数支持跨企业部署，联产品出成率建模与瓶颈预警，插单影响全链路评估（物料/产能/冷链/物流/合规），What-if情景推演三模式对比（旺季保供/淡季利润/临期清库），四维可视化看板（甘特图/桑基图/热力图/仪表盘）</div>
+      <div class="skill-changelog">
+        <div class="changelog-header">
+          <span class="changelog-label">当前版本</span>
+          <span class="version-tag major-tag">v2.3.0</span>
+        </div>
+        <div class="changelog-items">
+          <span>DAG级联传导引擎：约束间因果关系自动传播，一次调用评估全链</span>
+          <span>结构化情景对比引擎：四维评分（交付/成本/库存/风险）自动推荐</span>
+          <span>执行闭环：每次输出附行动清单 + 验证节点 + 偏差阈值 + 复盘检查点</span>
+        </div>
+      </div>
       <div class="skill-links">
-        <a href="https://weixin.qq.com/sph/ACutJK6Xf" target="_blank">观看演示</a>
-        <a href="https://github.com/wangguobao0215/Sloth-CPQ-Eido" target="_blank">GitHub</a>
+        <a href="https://github.com/wangguobao0215/Sloth-ProdSync-Eido" target="_blank">GitHub</a>
       </div>
     </div>
 
-    <!-- PSC -->
-    <div class="skill-card">
-      <span class="skill-icon">📋</span>
-      <div class="skill-name">售前顾问助理</div>
-      <span class="skill-audience">金蝶售前解决方案顾问 | B2B企业售前团队</span>
-      <div class="skill-pain">痛点：纪要整理耗时、提纲临时拼凑、竞品缺维度、方案经不起追问</div>
-      <div class="skill-features">会议笔记秒变战情分析，自动生成分层调研提纲和钩子问题，竞对作战简报含三级攻防话术，认知挑战引擎做盲区扫描和压力测试</div>
-      <div class="skill-links">
-        <a href="https://weixin.qq.com/sph/AmJyA2p8y" target="_blank">观看演示</a>
-        <a href="https://github.com/wangguobao0215/Sloth-PSC-Eido" target="_blank">GitHub</a>
-      </div>
-    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ==================== Section 2: Core Skills ==================== -->
+  <div class="section-header">
+    <span class="section-icon">◆</span>
+    <span class="section-title">核心技能 · 版本动态</span>
+  </div>
+  <div class="section-sub">战略 → 售前 → 销售 → 报价 → 传播，完整价值链</div>
+
+  <div class="skills">
 
     <!-- Sales -->
     <div class="skill-card">
-      <span class="skill-icon">💼</span>
-      <div class="skill-name">B2B销售智能助理</div>
-      <span class="skill-audience">金蝶一线销售及管理者 | B2B企业销售团队</span>
+      <div class="skill-top">
+        <span class="skill-icon">💼</span>
+        <div class="skill-name">B2B销售智能助理</div>
+      </div>
+      <span class="skill-audience">一线销售及管理者 | B2B企业销售团队</span>
       <div class="skill-pain">痛点：客户信息散落、跟进靠记忆、商机卡点不清、赢单输单没复盘</div>
-      <div class="skill-features">22+项能力覆盖完整销售周期，多平台挖掘客户自动补全画像，一句话记录活动智能更新漏斗，商机健康度五维评分低分自动预警</div>
+      <div class="skill-features">22+项核心能力覆盖完整销售周期：从线索挖掘、客户画像补全、漏斗推进、智能拜访准备，到商机健康度评分、竞品应对话术、赢单/输单复盘与交接，集成Agent-Reach全渠道搜索增强</div>
+      <div class="skill-changelog">
+        <div class="changelog-header">
+          <span class="changelog-label">版本动态</span>
+          <span class="version-tag major-tag">v4.1 完整版</span>
+        </div>
+        <div class="changelog-items">
+          <span>v2.0 新增：智能拜访准备、价值主张生成、会议纪要处理、关键日期提醒</span>
+          <span>v3.0 新增：商机健康度评分、阻力点诊断、竞品应对、协作快照、业绩仪表盘</span>
+          <span>v4.0 新增：赢/输单复盘、舆情监控、案例匹配、政策红利、团队管理</span>
+        </div>
+      </div>
       <div class="skill-links">
         <a href="https://weixin.qq.com/sph/A2kjExhTx" target="_blank">观看演示</a>
         <a href="https://github.com/wangguobao0215/Sloth-Sales-Eido" target="_blank">GitHub</a>
       </div>
     </div>
 
+    <!-- PSC -->
+    <div class="skill-card">
+      <div class="skill-top">
+        <span class="skill-icon">📋</span>
+        <div class="skill-name">售前顾问助理</div>
+      </div>
+      <span class="skill-audience">售前解决方案顾问 | B2B企业售前团队</span>
+      <div class="skill-pain">痛点：纪要整理耗时、提纲临时拼凑、竞品缺维度、方案经不起追问</div>
+      <div class="skill-features">十大模块覆盖售前全流程：会议纪要战情重构、分层调研提纲、SCQA方案骨架、竞对攻防简报、苏格拉底认知挑战、会后行动包、异议应对引擎、报价谈判辅助、Demo/POC准备、Deal优先级决策</div>
+      <div class="skill-changelog">
+        <div class="changelog-header">
+          <span class="changelog-label">版本动态</span>
+          <span class="version-tag major-tag">v2.0</span>
+        </div>
+        <div class="changelog-items">
+          <span>v2.0 新增四大模块：异议应对(G)、报价谈判(H)、Demo准备(I)、Deal决策(J)</span>
+          <span>跨技能协作升级：Agent-Reach 17平台深搜 + Sales CRM双向桥接</span>
+          <span>输出密度自适应：闪电/标准/深潜三档匹配不同时间预算</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://weixin.qq.com/sph/AmJyA2p8y" target="_blank">观看演示</a>
+        <a href="https://github.com/wangguobao0215/Sloth-PSC-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <!-- CPQ -->
+    <div class="skill-card">
+      <div class="skill-top">
+        <span class="skill-icon">🔧</span>
+        <div class="skill-name">智能报价助手</div>
+      </div>
+      <span class="skill-audience">制造业售前/实施顾问 | 销售工程师</span>
+      <div class="skill-pain">痛点：报价慢、成本拆不透、交期拍脑袋、版本改到乱</div>
+      <div class="skill-features">一句话输入自动提取参数，四级数据获取逐层穿透成本，三维约束验证交期可行性，合同条款风险自动扫描并量化，一次输出多套报价方案含利润率与风险等级，支持报价版本管理与历史对比</div>
+      <div class="skill-changelog">
+        <div class="changelog-header">
+          <span class="changelog-label">版本动态</span>
+          <span class="version-tag">v1.0.0</span>
+        </div>
+        <div class="changelog-items">
+          <span>六步完整报价流程（解析→成本→交期→风控→比选→版本管理）</span>
+          <span>多行业扩展就绪：通用机加工/电子制造加载参考文件即可</span>
+          <span>偏差学习：实际成本回溯对比，动态修正风险系数</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://weixin.qq.com/sph/ACutJK6Xf" target="_blank">观看演示</a>
+        <a href="https://github.com/wangguobao0215/Sloth-CPQ-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+
     <!-- StratAlign -->
     <div class="skill-card">
-      <span class="skill-icon">🗺️</span>
-      <div class="skill-name">战略对齐引擎</div>
-      <span class="skill-audience">金蝶战略咨询/数字化转型团队 | 企业CIO/CTO/CDO</span>
+      <div class="skill-top">
+        <span class="skill-icon">🗺️</span>
+        <div class="skill-name">战略对齐引擎</div>
+      </div>
+      <span class="skill-audience">CIO/CTO/CDO | 战略咨询/数字化转型团队</span>
       <div class="skill-pain">痛点：战略落不了地、投资散弹打鸟、AI场景选择无量化依据</div>
-      <div class="skill-features">愿景拆解为BSC四维目标并检测矛盾，扫描业务瓶颈，三维评分筛选最高价值AI场景，生成带ROI的投资组合路线图，预算变化秒级重排</div>
+      <div class="skill-features">愿景拆解为BSC四维目标并检测矛盾，扫描业务瓶颈与能力差距，AI原生潜力三维评分筛选最高价值场景，生成带ROI的投资组合路线图，双向验证（自上而下分解+自下而上回溯）</div>
+      <div class="skill-changelog">
+        <div class="changelog-header">
+          <span class="changelog-label">版本动态</span>
+          <span class="version-tag beta-tag">v0.5.0-beta</span>
+        </div>
+        <div class="changelog-items">
+          <span>Phase 1 核心引擎上线（战略解码→瓶颈→AI评分→覆盖→投资）</span>
+          <span>迷你诊断卡：200字内快速输出战略健康度评估</span>
+          <span>术语简化字典：24组专业术语→大白话对照</span>
+        </div>
+      </div>
       <div class="skill-links">
         <a href="https://weixin.qq.com/sph/ADQSKQANT" target="_blank">观看演示</a>
         <a href="https://github.com/wangguobao0215/Sloth-StratAlign-Eido" target="_blank">GitHub</a>
@@ -244,11 +449,24 @@ body {
 
     <!-- SMM -->
     <div class="skill-card">
-      <span class="skill-icon">📱</span>
-      <div class="skill-name">自媒体全流程运营</div>
-      <span class="skill-audience">金蝶品牌市场/内容运营团队 | 企业自媒体运营者</span>
+      <div class="skill-top">
+        <span class="skill-icon">📱</span>
+        <div class="skill-name">自媒体全流程运营</div>
+      </div>
+      <span class="skill-audience">品牌市场/内容运营 | 企业自媒体运营者</span>
       <div class="skill-pain">痛点：选题靠灵感、写作效率低、多平台逐个改稿发布、排版配图重复劳动</div>
-      <div class="skill-features">热点追踪自动生成选题卡片并评分排序，爆文写作引擎一键出稿，五大平台自动适配改写标题和内容，排版配图一体化，支持公众号/头条草稿箱直发、飞书归档、Obsidian本地存储</div>
+      <div class="skill-features">三种创作模式（热点追踪→爆文、专题策划→系列、主题直写），五大平台自动适配改写（公众号/头条/知乎/小红书/朋友圈），排版配图一体化，支持公众号/头条草稿箱直发、飞书归档与Obsidian本地存储</div>
+      <div class="skill-changelog">
+        <div class="changelog-header">
+          <span class="changelog-label">版本动态</span>
+          <span class="version-tag">v1.0.0 社区版</span>
+        </div>
+        <div class="changelog-items">
+          <span>选题引擎：热点抓取+内容拆解+评分排序，告别"选题靠灵感"</span>
+          <span>五模块流水线：选题→写作→适配→排版→发布全链路自动化</span>
+          <span>深度集成：baoyu-post-to-wechat直发 + Obsidian本地归档</span>
+        </div>
+      </div>
       <div class="skill-links">
         <a href="https://weixin.qq.com/sph/Are1nTlDq" target="_blank">观看演示</a>
         <a href="https://github.com/wangguobao0215/Sloth-SMM-Eido" target="_blank">GitHub</a>
