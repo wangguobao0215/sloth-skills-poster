@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>树懒老K AI技能矩阵 — PC展示版</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  width: 100%; height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #1a2332;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Slide Container */
+.slideshow {
+  width: 100vw; height: 100vh;
+  position: relative;
+}
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px 80px;
+  background: linear-gradient(135deg, #1e2d3d 0%, #243445 50%, #1a2635 100%);
+}
+.slide.active {
+  opacity: 1;
+  z-index: 10;
+}
+
+/* Background decoration */
+.slide::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -30%;
+  width: 800px; height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,136,176,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.slide::after {
+  content: '';
+  position: absolute;
+  bottom: -30%; left: -20%;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(90,158,143,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Top bar */
+.top-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  z-index: 20;
+}
+.brand-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 3px;
+}
+.brand-top .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4a80a8;
+}
+.page-indicator {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+}
+.page-indicator span.current {
+  color: #4a80a8;
+  font-weight: 600;
+}
+
+/* Pause hint */
+.pause-hint {
+  position: absolute;
+  top: 60px; right: 60px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.05);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.3s;
+}
+.pause-hint.paused {
+  color: #C57B3A;
+  background: rgba(197,123,58,0.1);
+  border-color: rgba(197,123,58,0.2);
+}
+.pause-icon {
+  width: 10px; height: 10px;
+  position: relative;
+}
+.pause-icon::before,
+.pause-icon::after {
+  content: '';
+  position: absolute;
+  top: 0; width: 3px; height: 10px;
+  background: currentColor;
+  border-radius: 1px;
+}
+.pause-icon::before { left: 0; }
+.pause-icon::after { right: 0; }
+.play-icon {
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 9px;
+  border-color: transparent transparent transparent currentColor;
+}
+
+/* Cover slide */
+.cover-content {
+  text-align: center;
+  z-index: 5;
+}
+.cover-avatar {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  border: 3px solid rgba(74,136,176,0.3);
+  margin-bottom: 28px;
+  box-shadow: 0 8px 32px rgba(74,136,176,0.15);
+}
+.cover-brand {
+  font-size: 14px;
+  color: #4a80a8;
+  letter-spacing: 6px;
+  margin-bottom: 16px;
+}
+.cover-title {
+  font-size: 52px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 4px;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.cover-subtitle {
+  font-size: 18px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+}
+.cover-stats {
+  display: inline-flex;
+  gap: 40px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 24px 48px;
+}
+.stat-item {
+  text-align: center;
+}
+.stat-num {
+  font-size: 36px;
+  font-weight: 700;
+  color: #4a80a8;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 6px;
+  letter-spacing: 1px;
+}
+.cover-slogan {
+  margin-top: 50px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #4a80a8;
+  letter-spacing: 8px;
+}
+
+/* Skill slide layout */
+.skill-slide-inner {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: start;
+  z-index: 5;
+}
+
+/* Left column */
+.skill-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.stage-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #4a80a8;
+  background: rgba(74,136,176,0.1);
+  border: 1px solid rgba(74,136,176,0.2);
+  border-radius: 20px;
+  padding: 6px 16px;
+  width: fit-content;
+  letter-spacing: 1px;
+}
+.skill-title-main {
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+.skill-title-code {
+  font-size: 16px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 400;
+  font-family: "SF Mono", Monaco, monospace;
+  margin-top: 4px;
+}
+.tags-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.tag-new {
+  font-size: 11px;
+  color: #fff;
+  background: linear-gradient(135deg, #5A9E8F, #4a8a7e);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.tag-updated {
+  font-size: 11px;
+  color: #fff;
+  background: linear-gradient(135deg, #C57B3A, #A8652E);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.tag-version {
+  font-size: 11px;
+  color: #5A9E8F;
+  border: 1px solid rgba(90,158,143,0.3);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-weight: 500;
+}
+.tag-beta {
+  color: #8E8B6A;
+  border-color: rgba(142,139,106,0.3);
+}
+.tag-upgraded {
+  color: #fff;
+  background: linear-gradient(135deg, #C57B3A, #A8652E);
+  border: none;
+}
+
+.audience-block {
+  margin-top: 8px;
+}
+.audience-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.audience-text {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+
+/* Right column */
+.skill-right {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.block-pain, .block-features, .block-changelog {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 24px 28px;
+}
+.block-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.block-pain .block-content {
+  font-size: 15px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+}
+.block-features .block-content {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.8;
+}
+.block-features .block-content span {
+  display: block;
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 6px;
+}
+.block-features .block-content span::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 10px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #4a80a8;
+}
+
+.changelog-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.changelog-items {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+}
+.changelog-items span {
+  display: block;
+  position: relative;
+  padding-left: 14px;
+}
+.changelog-items span::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: #4a80a8;
+}
+
+.skill-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+.skill-links a {
+  font-size: 13px;
+  color: #4a80a8;
+  text-decoration: none;
+  padding: 6px 18px;
+  border: 1px solid rgba(74,136,176,0.3);
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+.skill-links a:hover {
+  background: rgba(74,136,176,0.15);
+  border-color: rgba(74,136,176,0.5);
+}
+
+/* Section divider slide */
+.section-slide-inner {
+  text-align: center;
+  z-index: 5;
+}
+.section-icon-big {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+.section-title-big {
+  font-size: 40px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+.section-sub-big {
+  font-size: 16px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 1px;
+}
+.section-ring {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  max-width: 900px;
+}
+.ring-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+}
+.ring-arrow {
+  color: rgba(74,136,176,0.4);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+/* End slide */
+.end-content {
+  text-align: center;
+  z-index: 5;
+}
+.end-slogan {
+  font-size: 48px;
+  font-weight: 700;
+  color: #4a80a8;
+  letter-spacing: 12px;
+  margin-bottom: 20px;
+}
+.end-brand {
+  font-size: 16px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 4px;
+  margin-bottom: 40px;
+}
+.end-qr-hint {
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 2px;
+}
+
+/* Progress bar */
+.progress-bar {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #4a80a8, #5b9ab8);
+  transition: width 0.5s ease;
+  z-index: 20;
+}
+.progress-bg {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.05);
+  z-index: 19;
+}
+
+/* Click overlay for pause */
+.click-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 15;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .skill-slide-inner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    overflow-y: auto;
+  }
+  .slide { padding: 60px 40px 80px; }
+  .cover-title { font-size: 36px; }
+  .skill-title-main { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<div class="slideshow" id="slideshow">
+
+<!-- ==================== Slide 0: Cover ==================== -->
+<div class="slide active" data-index="0">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>树懒老K AI技能矩阵</div>
+    <div class="page-indicator"><span class="current">1</span> / 15</div>
+  </div>
+  <div class="cover-content">
+    <img src="sloth-avatar.jpg" alt="树懒老K" class="cover-avatar" onerror="this.style.display='none'">
+    <div class="cover-brand">树 懒 老 K</div>
+    <div class="cover-title">AI 智能体技能矩阵</div>
+    <div class="cover-subtitle">知识驱动的 B2B 企业全价值链智能体</div>
+    <div class="cover-stats">
+      <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">项技能</div></div>
+      <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">价值环节点</div></div>
+      <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">行业方案</div></div>
+    </div>
+    <div class="cover-slogan">慢一点，深一度</div>
+  </div>
+</div>
+
+<!-- ==================== Slide 1: Section Divider ==================== -->
+<div class="slide" data-index="1">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>树懒老K AI技能矩阵</div>
+    <div class="page-indicator"><span class="current">2</span> / 15</div>
+  </div>
+  <div class="section-slide-inner">
+    <div class="section-icon-big">◎</div>
+    <div class="section-title-big">业务智能价值环</div>
+    <div class="section-sub-big">以业务场景为基础，知识复用与累积驱动正向循环</div>
+    <div class="section-ring">
+      <div class="ring-item">🧠 研发管理</div><div class="ring-arrow">→</div>
+      <div class="ring-item">📈 市场增长</div><div class="ring-arrow">→</div>
+      <div class="ring-item">💼 销售管理</div><div class="ring-arrow">→</div>
+      <div class="ring-item">📋 售前咨询</div><div class="ring-arrow">→</div>
+      <div class="ring-item">🚀 项目交付</div><div class="ring-arrow">→</div>
+      <div class="ring-item">🌟 客户成功</div><div class="ring-arrow">→</div>
+      <div class="ring-item">🧠 回研发</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 2: 深构 ==================== -->
+<div class="slide" data-index="2">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>业务智能价值环 — 研发管理</div>
+    <div class="page-indicator"><span class="current">3</span> / 15</div>
+  </div>
+  <div class="skill-slide-inner">
+    <div class="skill-left">
+      <div class="stage-tag">🧠 研发管理</div>
+      <div>
+        <div class="skill-title-main">深构 · 研发协同</div>
+        <div class="skill-title-code">HybridDev</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag-new">NEW</span>
+        <span class="tag-version">v1.1.1</span>
+      </div>
+      <div class="audience-block">
+        <div class="audience-label">目标用户</div>
+        <div class="audience-text">SaaS+AI混合研发团队 | 技术负责人/研发总监</div>
+      </div>
+    </div>
+    <div class="skill-right">
+      <div class="block-pain">
+        <div class="block-label">痛点</div>
+        <div class="block-content">SaaS确定性与AI概率性开发并行，团队语言鸿沟、进度脱节、职责模糊、知识流失</div>
+      </div>
+      <div class="block-features">
+        <div class="block-label">核心能力</div>
+        <div class="block-content">
+          <span>"中枢神经"架构编排4个子技能</span>
+          <span>协议锻造所：7状态13迁移协作协议状态机</span>
+          <span>实验日志 + 混合看板 + GTM翻译官</span>
+          <span>Markdown+SQLite双写本地优先，文档鲜度四级评分</span>
+          <span>6大核心指标，8周4阶段实施路线图</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://github.com/wangguobao0215/Sloth-HybridDev-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 3: 深拓 ==================== -->
+<div class="slide" data-index="3">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>业务智能价值环 — 市场增长</div>
+    <div class="page-indicator"><span class="current">4</span> / 15</div>
+  </div>
+  <div class="skill-slide-inner">
+    <div class="skill-left">
+      <div class="stage-tag">📈 市场增长</div>
+      <div>
+        <div class="skill-title-main">深拓 · 市场增长</div>
+        <div class="skill-title-code">MGO</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag-new">NEW</span>
+        <span class="tag-version">v1.1.0</span>
+      </div>
+      <div class="audience-block">
+        <div class="audience-label">目标用户</div>
+        <div class="audience-text">B2B SaaS市场团队 | 内容营销/增长/活动/运营</div>
+      </div>
+    </div>
+    <div class="skill-right">
+      <div class="block-pain">
+        <div class="block-label">痛点</div>
+        <div class="block-content">内容产出低效、线索清洗手动、跨渠道适配重复劳动、数据孤岛阻碍增长决策</div>
+      </div>
+      <div class="block-features">
+        <div class="block-label">核心能力</div>
+        <div class="block-content">
+          <span>7大模块覆盖市场全链路</span>
+          <span>内容创意引擎：AIDA/STAR框架，3分钟合规文章</span>
+          <span>线索培育转化：HABC四维评分+自动孵化序列</span>
+          <span>市场情报中心：四维竞品监控+攻防简报</span>
+          <span>增长指标与实验框架：7层KPI+3归因模型</span>
+          <span>3级合规风控（广告法/PIPL）</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://github.com/wangguobao0215/Sloth-MGO-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 4: 深声 ==================== -->
+<div class="slide" data-index="4">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>业务智能价值环 — 市场增长</div>
+    <div class="page-indicator"><span class="current">5</span> / 15</div>
+  </div>
+  <div class="skill-slide-inner">
+    <div class="skill-left">
+      <div class="stage-tag">📈 市场增长</div>
+      <div>
+        <div class="skill-title-main">深声 · 内容运营</div>
+        <div class="skill-title-code">SMM</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag-version">v1.0.0 社区版</span>
+      </div>
+      <div class="audience-block">
+        <div class="audience-label">目标用户</div>
+        <div class="audience-text">品牌市场/内容运营 | 企业自媒体运营者</div>
+      </div>
+    </div>
+    <div class="skill-right">
+      <div class="block-pain">
+        <div class="block-label">痛点</div>
+        <div class="block-content">选题靠灵感、写作效率低、多平台逐个改稿发布、排版配图重复劳动</div>
+      </div>
+      <div class="block-features">
+        <div class="block-label">核心能力</div>
+        <div class="block-content">
+          <span>三种创作模式：热点追踪→爆文、专题策划→系列、主题直写</span>
+          <span>五大平台自动适配改写：公众号/头条/知乎/小红书/朋友圈</span>
+          <span>排版配图一体化，支持草稿箱直发</span>
+          <span>baoyu-post-to-wechat直发 + Obsidian本地归档</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://weixin.qq.com/sph/Are1nTlDq" target="_blank">观看演示</a>
+        <a href="https://github.com/wangguobao0215/Sloth-SMM-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 5: 深耕 ==================== -->
+<div class="slide" data-index="5">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>业务智能价值环 — 销售管理</div>
+    <div class="page-indicator"><span class="current">6</span> / 15</div>
+  </div>
+  <div class="skill-slide-inner">
+    <div class="skill-left">
+      <div class="stage-tag">💼 销售管理</div>
+      <div>
+        <div class="skill-title-main">深耕 · 销售管理</div>
+        <div class="skill-title-code">Sales</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag-version tag-upgraded">v5.0</span>
+      </div>
+      <div class="audience-block">
+        <div class="audience-label">目标用户</div>
+        <div class="audience-text">一线销售及管理者 | B2B企业销售团队（中国及东南亚）</div>
+      </div>
+    </div>
+    <div class="skill-right">
+      <div class="block-pain">
+        <div class="block-label">痛点</div>
+        <div class="block-content">客户信息散落、不知道今天该做什么、跟进靠记忆、商机卡点不清、赢单输单没复盘</div>
+      </div>
+      <div class="block-features">
+        <div class="block-label">核心能力</div>
+        <div class="block-content">
+          <span>25+项核心能力覆盖完整销售周期</span>
+          <span>关系驱动（Guanxi-aware）客户管理</span>
+          <span>每日聚焦引擎自动排优先级</span>
+          <span>主动教练触发规则：窗口关闭提醒/关系冷却预警</span>
+          <span>商机健康度评分、竞品应对、赢输单复盘</span>
+          <span>集成Agent-Reach全渠道搜索</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://weixin.qq.com/sph/A2kjExhTx" target="_blank">观看演示</a>
+        <a href="https://github.com/wangguobao0215/Sloth-Sales-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 6: 深略 ==================== -->
+<div class="slide" data-index="6">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>业务智能价值环 — 售前咨询</div>
+    <div class="page-indicator"><span class="current">7</span> / 15</div>
+  </div>
+  <div class="skill-slide-inner">
+    <div class="skill-left">
+      <div class="stage-tag">📋 售前咨询</div>
+      <div>
+        <div class="skill-title-main">深略 · 战略对齐</div>
+        <div class="skill-title-code">StratAlign</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag-updated">UPDATED</span>
+        <span class="tag-version tag-upgraded">v1.4.0</span>
+        <span style="font-size:11px;color:#C57B3A;margin-left:4px;">← v0.5.0-beta 重大升级</span>
+      </div>
+      <div class="audience-block">
+        <div class="audience-label">目标用户</div>
+        <div class="audience-text">管理咨询顾问 | CIO/CTO/CDO | 数字化转型团队</div>
+      </div>
+    </div>
+    <div class="skill-right">
+      <div class="block-pain">
+        <div class="block-label">痛点</div>
+        <div class="block-content">战略落不了地、投资散弹打鸟、AI场景选择无量化依据、行业know-how碎片化</div>
+      </div>
+      <div class="block-features">
+        <div class="block-label">核心能力</div>
+        <div class="block-content">
+          <span>愿景→BSC四维分解并检测矛盾</span>
+          <span>业务瓶颈与能力差距扫描</span>
+          <span>AI原生潜力三维评分筛选最高价值场景</span>
+          <span>OSINT在线情报引擎：IT系统五阶段搜索+4搜索策略</span>
+          <span>8大行业Playbook全覆盖（制造/零售/医疗/金融/能源/交通/地产等）</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://weixin.qq.com/sph/ADQSKQANT" target="_blank">观看演示</a>
+        <a href="https://github.com/wangguobao0215/Sloth-StratAlign-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 7: 深策 ==================== -->
+<div class="slide" data-index="7">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>业务智能价值环 — 售前咨询</div>
+    <div class="page-indicator"><span class="current">8</span> / 15</div>
+  </div>
+  <div class="skill-slide-inner">
+    <div class="skill-left">
+      <div class="stage-tag">📋 售前咨询</div>
+      <div>
+        <div class="skill-title-main">深策 · 制造咨询套件</div>
+        <div class="skill-title-code">MfgConsult</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag-new">NEW</span>
+        <span class="tag-version">v1.0.0</span>
+      </div>
+      <div class="audience-block">
+        <div class="audience-label">目标用户</div>
+        <div class="audience-text">管理咨询师/精益顾问/数字化转型顾问 | 工厂总经理/运营VP</div>
+      </div>
+    </div>
+    <div class="skill-right">
+      <div class="block-pain">
+        <div class="block-label">痛点</div>
+        <div class="block-content">诊断靠经验、架构设计缺方法论、咨询成果难落地、从诊断到执行断层</div>
+      </div>
+      <div class="block-features">
+        <div class="block-label">核心能力</div>
+        <div class="block-content">
+          <span>诊断顾问Advisor：七步诊断工作流（三层冲突分析/有效产出会计/S&OP诊断）</span>
+          <span>架构设计师SynCore：九步设计工作流（五层十五技能包蓝图/ERP·MES集成）</span>
+          <span>运营助手Ops：五大落地模式（接单/排产/交期/插单/利润）</span>
+          <span>TOC/有效产出会计/SMED/DBR 多框架融合</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://github.com/wangguobao0215/Sloth-MfgConsult-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 8: 深谋 ==================== -->
+<div class="slide" data-index="8">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>业务智能价值环 — 售前咨询</div>
+    <div class="page-indicator"><span class="current">9</span> / 15</div>
+  </div>
+  <div class="skill-slide-inner">
+    <div class="skill-left">
+      <div class="stage-tag">📋 售前咨询</div>
+      <div>
+        <div class="skill-title-main">深谋 · 售前咨询</div>
+        <div class="skill-title-code">PSC</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag-version tag-upgraded">v2.0</span>
+      </div>
+      <div class="audience-block">
+        <div class="audience-label">目标用户</div>
+        <div class="audience-text">售前解决方案顾问 | B2B企业售前团队</div>
+      </div>
+    </div>
+    <div class="skill-right">
+      <div class="block-pain">
+        <div class="block-label">痛点</div>
+        <div class="block-content">纪要整理耗时、提纲临时拼凑、竞品缺维度、方案经不起追问、Demo准备靠临场发挥</div>
+      </div>
+      <div class="block-features">
+        <div class="block-label">核心能力</div>
+        <div class="block-content">
+          <span>十二大模块覆盖售前全链路</span>
+          <span>会议纪要战情重构、分层调研提纲、SCQA方案骨架</span>
+          <span>竞对攻防简报、苏格拉底认知挑战、会后行动包</span>
+          <span>客户异议应对（ACR三层结构）、报价谈判辅助</span>
+          <span>Demo/POC脚本准备、Deal优先级决策、丢单复盘框架</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://weixin.qq.com/sph/AmJyA2p8y" target="_blank">观看演示</a>
+        <a href="https://github.com/wangguobao0215/Sloth-PSC-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 9: 深达 ==================== -->
+<div class="slide" data-index="9">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>业务智能价值环 — 项目交付</div>
+    <div class="page-indicator"><span class="current">10</span> / 15</div>
+  </div>
+  <div class="skill-slide-inner">
+    <div class="skill-left">
+      <div class="stage-tag">🚀 项目交付</div>
+      <div>
+        <div class="skill-title-main">深达 · 交付管理</div>
+        <div class="skill-title-code">DeliveryMatrix</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag-new">NEW</span>
+        <span class="tag-version">v1.0.0</span>
+      </div>
+      <div class="audience-block">
+        <div class="audience-label">目标用户</div>
+        <div class="audience-text">软件项目经理(PM) | 交付总监(PMO) | 交付咨询顾问</div>
+      </div>
+    </div>
+    <div class="skill-right">
+      <div class="block-pain">
+        <div class="block-label">痛点</div>
+        <div class="block-content">PM淹没在重复文档劳动（周报/纪要/风险台账），项目数据散落无统一视图，跨会话上下文丢失</div>
+      </div>
+      <div class="block-features">
+        <div class="block-label">核心能力</div>
+        <div class="block-content">
+          <span>9大原子能力 × 3角色指挥官（PM/总监/顾问）</span>
+          <span>确定性意图路由引擎</span>
+          <span>YAML三层状态管理跨会话持久化</span>
+          <span>中国本土协作集成（飞书/钉钉/企微）</span>
+          <span>行业模板（政务/SaaS/通用）</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://github.com/wangguobao0215/Sloth-DeliveryMatrix-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 10: 深信 ==================== -->
+<div class="slide" data-index="10">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>业务智能价值环 — 客户成功</div>
+    <div class="page-indicator"><span class="current">11</span> / 15</div>
+  </div>
+  <div class="skill-slide-inner">
+    <div class="skill-left">
+      <div class="stage-tag">🌟 客户成功</div>
+      <div>
+        <div class="skill-title-main">深信 · 客户成功</div>
+        <div class="skill-title-code">SkyHub</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag-new">NEW</span>
+        <span class="tag-version">v1.0.0</span>
+      </div>
+      <div class="audience-block">
+        <div class="audience-label">目标用户</div>
+        <div class="audience-text">客户成功经理(CSM) | CS总监/VP</div>
+      </div>
+    </div>
+    <div class="skill-right">
+      <div class="block-pain">
+        <div class="block-label">痛点</div>
+        <div class="block-content">CSM团队常年"救火模式"、工具碎片化、无统一客户健康视图、续费扩展靠感觉</div>
+      </div>
+      <div class="block-features">
+        <div class="block-label">核心能力</div>
+        <div class="block-content">
+          <span>17个子技能覆盖客户全生命周期6阶段</span>
+          <span>7维健康评分模型（产品采纳/支持健康/合同状态/关系深度/价值实现/客户情绪/竞争环境）</span>
+          <span>10大标准化Playbook，3级客户分层，5级自动化治理</span>
+          <span>对标Gainsight/ChurnZero，中国本土适配</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://github.com/TreeSlothKing/Sloth-SkyHub-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 11: Section Divider 2 ==================== -->
+<div class="slide" data-index="11">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>树懒老K AI技能矩阵</div>
+    <div class="page-indicator"><span class="current">12</span> / 15</div>
+  </div>
+  <div class="section-slide-inner">
+    <div class="section-icon-big">◆</div>
+    <div class="section-title-big">行业场景方案</div>
+    <div class="section-sub-big">面向制造业客户的垂直场景能力，从产销协同到咨询落地</div>
+    <div class="section-ring">
+      <div class="ring-item">🏭 深筹 · 产销协同</div>
+      <div class="ring-item">⚙️ 深驭 · 制造运营套件</div>
+      <div class="ring-item">🔧 深算 · 报价管理</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 12: 深筹 ==================== -->
+<div class="slide" data-index="12">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>行业场景方案</div>
+    <div class="page-indicator"><span class="current">13</span> / 15</div>
+  </div>
+  <div class="skill-slide-inner">
+    <div class="skill-left">
+      <div class="stage-tag">🏭 行业场景方案</div>
+      <div>
+        <div class="skill-title-main">深筹 · 产销协同</div>
+        <div class="skill-title-code">ProdSync</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag-version tag-upgraded">v2.3.0</span>
+      </div>
+      <div class="audience-block">
+        <div class="audience-label">目标用户</div>
+        <div class="audience-text">计划经理 | 车间计划员 | 快消品肉制品行业</div>
+      </div>
+    </div>
+    <div class="skill-right">
+      <div class="block-pain">
+        <div class="block-label">痛点</div>
+        <div class="block-content">插单影响评不清、联产品平衡算不准、排产调整全靠经验、多场景对比无量化</div>
+      </div>
+      <div class="block-features">
+        <div class="block-label">核心能力</div>
+        <div class="block-content">
+          <span>十一项约束满足引擎（含DAG五层级联传导）</span>
+          <span>370+可配企业参数支持跨企业部署</span>
+          <span>联产品出成率建模与瓶颈预警</span>
+          <span>What-if情景推演三模式对比（旺季保供/淡季利润/临期清库）</span>
+          <span>四维可视化看板（甘特图/桑基图/热力图/仪表盘）</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://weixin.qq.com/sph/AYTPRpLLo" target="_blank">观看演示</a>
+        <a href="https://github.com/wangguobao0215/Sloth-ProdSync-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 13: 深驭 ==================== -->
+<div class="slide" data-index="13">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>行业场景方案</div>
+    <div class="page-indicator"><span class="current">14</span> / 15</div>
+  </div>
+  <div class="skill-slide-inner">
+    <div class="skill-left">
+      <div class="stage-tag">⚙️ 行业场景方案</div>
+      <div>
+        <div class="skill-title-main">深驭 · 制造运营套件</div>
+        <div class="skill-title-code">MfgSuite</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag-new">NEW</span>
+        <span class="tag-version">v1.0.0</span>
+      </div>
+      <div class="audience-block">
+        <div class="audience-label">目标用户</div>
+        <div class="audience-text">生产计划员/PMC主管/运营总监/财务经理 | HMLV多品种小批量制造企业</div>
+      </div>
+    </div>
+    <div class="skill-right">
+      <div class="block-pain">
+        <div class="block-label">痛点</div>
+        <div class="block-content">接单拍脑袋、排程靠经验、交期凭感觉、成本算不清、产能看不透</div>
+      </div>
+      <div class="block-features">
+        <div class="block-label">核心能力</div>
+        <div class="block-content">
+          <span>父子架构双模块：决策大脑Brain + 分析透镜Lens</span>
+          <span>Brain 5大实时决策模式：接单决策/排程建议/交期速算/插单影响/每日站会</span>
+          <span>Lens 5大深度分析模式：成本真相/产能透视/订单体检/效率诊断/趋势预警</span>
+          <span>关键词自动路由分发，三级数据接入无感降级</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://github.com/wangguobao0215/Sloth-MfgSuite-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 14: 深算 ==================== -->
+<div class="slide" data-index="14">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>行业场景方案</div>
+    <div class="page-indicator"><span class="current">15</span> / 15</div>
+  </div>
+  <div class="skill-slide-inner">
+    <div class="skill-left">
+      <div class="stage-tag">🔧 行业场景方案</div>
+      <div>
+        <div class="skill-title-main">深算 · 报价管理</div>
+        <div class="skill-title-code">CPQ</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag-version">v1.0.0</span>
+      </div>
+      <div class="audience-block">
+        <div class="audience-label">目标用户</div>
+        <div class="audience-text">制造业售前/实施顾问 | 销售工程师</div>
+      </div>
+    </div>
+    <div class="skill-right">
+      <div class="block-pain">
+        <div class="block-label">痛点</div>
+        <div class="block-content">报价慢、成本拆不透、交期拍脑袋、版本改到乱</div>
+      </div>
+      <div class="block-features">
+        <div class="block-label">核心能力</div>
+        <div class="block-content">
+          <span>一句话输入自动提取参数</span>
+          <span>四级数据获取逐层穿透成本</span>
+          <span>三维约束验证交期可行性</span>
+          <span>合同条款风险自动扫描并量化</span>
+          <span>一次输出多套报价方案含利润率与风险等级</span>
+          <span>支持报价版本管理与历史对比</span>
+        </div>
+      </div>
+      <div class="skill-links">
+        <a href="https://weixin.qq.com/sph/ACutJK6Xf" target="_blank">观看演示</a>
+        <a href="https://github.com/wangguobao0215/Sloth-CPQ-Eido" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Slide 15: End ==================== -->
+<div class="slide" data-index="15">
+  <div class="click-overlay" onclick="togglePause()"></div>
+  <div class="top-bar">
+    <div class="brand-top"><div class="dot"></div>树懒老K AI技能矩阵</div>
+    <div class="page-indicator"><span class="current">15</span> / 15</div>
+  </div>
+  <div class="end-content">
+    <div class="end-slogan">慢一点，深一度</div>
+    <div class="end-brand">树懒老K · 树懒老K AI技能矩阵</div>
+    <div class="end-qr-hint">全部开源 · 欢迎 Star & Issue · Powered by QoderWork</div>
+  </div>
+</div>
+
+<!-- Progress bar -->
+<div class="progress-bg"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Pause hint -->
+<div class="pause-hint" id="pauseHint">
+  <div class="pause-icon" id="pauseIcon"></div>
+  <span id="pauseText">自动播放中，点击暂停</span>
+</div>
+
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+let currentIndex = 0;
+let isPlaying = true;
+let timer = null;
+const interval = 6000; // 6秒自动翻页
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === index);
+  });
+  // Update progress bar
+  const progress = ((index + 1) / totalSlides) * 100;
+  document.getElementById('progressBar').style.width = progress + '%';
+  // Update pause hint page num (use the slide's own indicator)
+}
+
+function nextSlide() {
+  currentIndex = (currentIndex + 1) % totalSlides;
+  showSlide(currentIndex);
+}
+
+function prevSlide() {
+  currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+  showSlide(currentIndex);
+}
+
+function startAutoPlay() {
+  if (timer) clearInterval(timer);
+  timer = setInterval(nextSlide, interval);
+  isPlaying = true;
+  updatePauseHint();
+}
+
+function stopAutoPlay() {
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  }
+  isPlaying = false;
+  updatePauseHint();
+}
+
+function togglePause() {
+  if (isPlaying) {
+    stopAutoPlay();
+  } else {
+    startAutoPlay();
+  }
+}
+
+function updatePauseHint() {
+  const hint = document.getElementById('pauseHint');
+  const icon = document.getElementById('pauseIcon');
+  const text = document.getElementById('pauseText');
+  if (isPlaying) {
+    hint.classList.remove('paused');
+    icon.className = 'pause-icon';
+    text.textContent = '自动播放中，点击暂停';
+  } else {
+    hint.classList.add('paused');
+    icon.className = 'play-icon';
+    text.textContent = '已暂停，点击继续';
+  }
+}
+
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') {
+    e.preventDefault();
+    nextSlide();
+    if (isPlaying) startAutoPlay(); // reset timer
+  } else if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    prevSlide();
+    if (isPlaying) startAutoPlay();
+  } else if (e.key === 'p' || e.key === 'P') {
+    togglePause();
+  }
+});
+
+// Initialize
+showSlide(0);
+startAutoPlay();
+</script>
+
+</body>
+</html>
