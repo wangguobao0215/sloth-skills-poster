@@ -138,7 +138,7 @@ html, body {
 /* Fixed QR Code */
 .fixed-qrcode {
   position: absolute;
-  bottom: 24px; right: 40px;
+  bottom: 24px; left: 40px;
   z-index: 20;
   display: flex;
   flex-direction: column;
@@ -308,6 +308,12 @@ html, body {
   width: fit-content;
   letter-spacing: 1px;
 }
+.skill-left > div:nth-of-type(2) {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 .skill-title-main {
   font-size: 44px;
   font-weight: 700;
@@ -319,7 +325,6 @@ html, body {
   color: rgba(255,255,255,0.35);
   font-weight: 400;
   font-family: "SF Mono", Monaco, monospace;
-  margin-top: 4px;
 }
 .tags-row {
   display: flex;
@@ -1302,7 +1307,7 @@ html, body {
       </div>
       <div class="skill-links">
         <a href="https://weixin.qq.com/sph/AYTPRpLLo" target="_blank">观看演示</a>
-        <a href="https://github.com/wangguobao0215/Sloth-ProdSync-Eido/blob/main/references/user-guide.md" target="_blank">用户手册</a>
+        <a href="https://github.com/wangguobao0215/sloth-skills-poster/blob/master/docs/prodsync-user-guide.md" target="_blank">用户手册</a>
         <span class="private-tag">🔒 私有仓库，如需试用请联系树懒老K</span>
       </div>
     </div>
@@ -1360,7 +1365,7 @@ html, body {
         </ul>
       </div>
       <div class="skill-links">
-        <a href="https://github.com/wangguobao0215/Sloth-MfgSuite-Eido/blob/main/references/user-guide.md" target="_blank">用户手册</a>
+        <a href="https://github.com/wangguobao0215/sloth-skills-poster/blob/master/docs/mfgsuite-user-guide.md" target="_blank">用户手册</a>
         <span class="private-tag">🔒 私有仓库，如需试用请联系树懒老K</span>
       </div>
     </div>
@@ -1418,7 +1423,7 @@ html, body {
       </div>
       <div class="skill-links">
         <a href="https://weixin.qq.com/sph/ACutJK6Xf" target="_blank">观看演示</a>
-        <a href="https://github.com/wangguobao0215/Sloth-CPQ-Eido/blob/main/references/user-guide.md" target="_blank">用户手册</a>
+        <a href="https://github.com/wangguobao0215/sloth-skills-poster/blob/master/docs/cpq-user-guide.md" target="_blank">用户手册</a>
         <span class="private-tag">🔒 私有仓库，如需试用请联系树懒老K</span>
       </div>
     </div>
@@ -1445,7 +1450,10 @@ html, body {
     </div>
     <div class="end-hint">价值环技能全部开源 · 行业方案私有仓库可申请试用 · Powered by QoderWork</div>
   </div>
-  <div class="fixed-qrcode" style="display:none;"></div>
+  <div class="fixed-qrcode">
+    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+    <span>扫码关注</span>
+  </div>
 </div>
 
 <!-- Progress bar -->
