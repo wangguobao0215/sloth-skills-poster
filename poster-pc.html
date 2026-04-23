@@ -9,7 +9,7 @@
 html, body {
   width: 100%; height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  background: #1a2332;
+  background: #151e2b;
   overflow: hidden;
 }
 
@@ -23,13 +23,16 @@ html, body {
   top: 0; left: 0;
   width: 100%; height: 100%;
   opacity: 0;
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 70px 80px 90px;
-  background: linear-gradient(135deg, #1e2d3d 0%, #243445 50%, #1a2635 100%);
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(74,136,176,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(90,158,143,0.04) 0%, transparent 50%),
+    linear-gradient(160deg, #192536 0%, #1e2e3f 35%, #1a2839 70%, #161f2d 100%);
   cursor: pointer;
 }
 .slide.active {
@@ -67,6 +70,8 @@ html, body {
   justify-content: space-between;
   padding: 0 60px;
   z-index: 20;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: linear-gradient(to bottom, rgba(21,30,43,0.6), transparent);
 }
 .brand-top {
   display: flex;
@@ -171,7 +176,7 @@ html, body {
 }
 .cover-title {
   font-size: 52px;
-  font-weight: 700;
+  font-weight: 800;
   color: #fff;
   letter-spacing: 4px;
   margin-bottom: 16px;
@@ -242,7 +247,7 @@ html, body {
 }
 .ring-title-big {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 800;
   color: #fff;
   margin-bottom: 10px;
   letter-spacing: 2px;
@@ -267,8 +272,8 @@ html, body {
   width: 100%;
   max-width: 1280px;
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 50px;
+  grid-template-columns: 300px 1fr;
+  gap: 56px;
   align-items: start;
   z-index: 5;
 }
@@ -279,6 +284,16 @@ html, body {
   flex-direction: column;
   gap: 18px;
   padding-top: 8px;
+  position: relative;
+  padding-left: 20px;
+}
+.skill-left::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px; bottom: 0;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #4a80a8, rgba(90,158,143,0.4), transparent);
 }
 .stage-tag {
   display: inline-flex;
@@ -294,7 +309,7 @@ html, body {
   letter-spacing: 1px;
 }
 .skill-title-main {
-  font-size: 38px;
+  font-size: 44px;
   font-weight: 700;
   color: #fff;
   line-height: 1.2;
@@ -368,6 +383,9 @@ html, body {
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 14px;
   padding: 18px 22px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
 }
 .block-label {
   font-size: 10px;
@@ -435,8 +453,9 @@ html, body {
   transition: all 0.2s;
 }
 .skill-links a:hover {
-  background: rgba(74,136,176,0.15);
+  background: rgba(74,136,176,0.2);
   border-color: rgba(74,136,176,0.5);
+  transform: translateY(-1px);
 }
 .skill-links .private-tag {
   font-size: 12px;
@@ -457,7 +476,7 @@ html, body {
 }
 .section-title-big {
   font-size: 38px;
-  font-weight: 700;
+  font-weight: 800;
   color: #fff;
   margin-bottom: 10px;
   letter-spacing: 2px;
@@ -508,7 +527,7 @@ html, body {
 }
 .end-slogan {
   font-size: 48px;
-  font-weight: 700;
+  font-weight: 800;
   color: #4a80a8;
   letter-spacing: 12px;
   margin-bottom: 20px;
@@ -550,6 +569,7 @@ html, body {
   background: linear-gradient(90deg, #4a80a8, #5b9ab8);
   transition: width 0.5s ease;
   z-index: 20;
+  box-shadow: 0 0 8px rgba(74,128,168,0.4);
 }
 .progress-bg {
   position: absolute;
@@ -584,7 +604,7 @@ html, body {
   <div class="cover-content">
     <img src="sloth-avatar.jpg" alt="树懒老K" class="cover-avatar" onerror="this.style.display='none'">
     <div class="cover-brand">树 懒 老 K</div>
-    <div class="cover-title">AI 智能体技能矩阵</div>
+    <div class="cover-title">深X技能矩阵</div>
     <div class="cover-subtitle">知识驱动的 B2B 企业全价值链智能体</div>
     <div class="cover-stats">
       <div class="stat-item"><div class="stat-num">12</div><div class="stat-label">项技能</div></div>
@@ -608,7 +628,7 @@ html, body {
   </div>
   <div class="ring-slide-inner">
     <div class="ring-icon-big">◎</div>
-    <div class="ring-title-big">业务智能价值环</div>
+    <div class="ring-title-big">B2B全价值链深X技能矩阵</div>
     <div class="ring-sub-big">以业务场景为基础，知识复用与累积驱动正向循环</div>
     <div class="ring-svg-wrap">
       <svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" style="max-height:420px;">
@@ -1209,7 +1229,7 @@ html, body {
   </div>
   <div class="section-slide-inner">
     <div class="section-icon-big">◆</div>
-    <div class="section-title-big">行业场景方案</div>
+    <div class="section-title-big">行业场景深X方案</div>
     <div class="section-sub-big">面向制造业客户的垂直场景能力，从产销协同到咨询落地</div>
     <div class="section-skills-preview">
       <div class="preview-card">
