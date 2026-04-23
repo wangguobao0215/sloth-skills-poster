@@ -288,6 +288,8 @@ html, body {
   padding-top: 8px;
   position: relative;
   padding-left: 20px;
+  height: 100%;
+  justify-content: flex-start;
 }
 .skill-left::before {
   content: '';
@@ -378,6 +380,30 @@ html, body {
   color: rgba(255,255,255,0.65);
   line-height: 1.6;
 }
+
+/* Skill page QR code */
+.skill-qr {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-top: 24px;
+  padding-bottom: 8px;
+}
+.skill-qr img {
+  width: 80px; height: 80px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  padding: 4px;
+}
+.skill-qr span {
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.5px;
+}
+
 
 /* Right column */
 .skill-right {
@@ -618,15 +644,7 @@ html, body {
       <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">价值环节点</div></div>
       <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">行业方案</div></div>
     </div>
-    <div class="cover-qr">
-      <img src="assets/qrcode.jpg" alt="二维码" onerror="this.style.display='none'">
-      <span>扫码关注树懒老K · 获取更多 AI 技能</span>
-    </div>
-    <div class="cover-slogan">慢一点，深一度</div>
-  </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
+        <div class="cover-slogan">慢一点，深一度</div>
   </div>
 </div>
 
@@ -697,10 +715,6 @@ html, body {
       </svg>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 2: 深构 ==================== -->
@@ -724,6 +738,10 @@ html, body {
         <div class="audience-label">目标用户</div>
         <div class="audience-text">SaaS+AI混合研发团队 | 技术负责人/研发总监</div>
       </div>
+        <div class="skill-qr">
+          <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+          <span>扫码关注</span>
+        </div>
     </div>
     <div class="skill-right">
       <div class="block block-pain">
@@ -756,10 +774,6 @@ html, body {
       </div>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 3: 深拓 ==================== -->
@@ -783,6 +797,10 @@ html, body {
         <div class="audience-label">目标用户</div>
         <div class="audience-text">B2B SaaS市场团队 | 内容营销/增长/活动/运营</div>
       </div>
+        <div class="skill-qr">
+          <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+          <span>扫码关注</span>
+        </div>
     </div>
     <div class="skill-right">
       <div class="block block-pain">
@@ -815,10 +833,6 @@ html, body {
       </div>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 4: 深声 ==================== -->
@@ -841,6 +855,10 @@ html, body {
         <div class="audience-label">目标用户</div>
         <div class="audience-text">品牌市场/内容运营 | 企业自媒体运营者</div>
       </div>
+        <div class="skill-qr">
+          <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+          <span>扫码关注</span>
+        </div>
     </div>
     <div class="skill-right">
       <div class="block block-pain">
@@ -872,10 +890,6 @@ html, body {
       </div>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 5: 深耕 ==================== -->
@@ -898,6 +912,10 @@ html, body {
         <div class="audience-label">目标用户</div>
         <div class="audience-text">一线销售及管理者 | B2B企业销售团队（中国及东南亚）</div>
       </div>
+        <div class="skill-qr">
+          <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+          <span>扫码关注</span>
+        </div>
     </div>
     <div class="skill-right">
       <div class="block block-pain">
@@ -931,10 +949,6 @@ html, body {
       </div>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 6: 深略 ==================== -->
@@ -959,6 +973,10 @@ html, body {
         <div class="audience-label">目标用户</div>
         <div class="audience-text">管理咨询顾问 | CIO/CTO/CDO | 数字化转型团队</div>
       </div>
+        <div class="skill-qr">
+          <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+          <span>扫码关注</span>
+        </div>
     </div>
     <div class="skill-right">
       <div class="block block-pain">
@@ -992,10 +1010,6 @@ html, body {
       </div>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 7: 深策 ==================== -->
@@ -1019,6 +1033,10 @@ html, body {
         <div class="audience-label">目标用户</div>
         <div class="audience-text">管理咨询师/精益顾问/数字化转型顾问 | 工厂总经理/运营VP</div>
       </div>
+        <div class="skill-qr">
+          <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+          <span>扫码关注</span>
+        </div>
     </div>
     <div class="skill-right">
       <div class="block block-pain">
@@ -1050,10 +1068,6 @@ html, body {
       </div>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 8: 深谋 ==================== -->
@@ -1076,6 +1090,10 @@ html, body {
         <div class="audience-label">目标用户</div>
         <div class="audience-text">售前解决方案顾问 | B2B企业售前团队</div>
       </div>
+        <div class="skill-qr">
+          <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+          <span>扫码关注</span>
+        </div>
     </div>
     <div class="skill-right">
       <div class="block block-pain">
@@ -1109,10 +1127,6 @@ html, body {
       </div>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 9: 深达 ==================== -->
@@ -1136,6 +1150,10 @@ html, body {
         <div class="audience-label">目标用户</div>
         <div class="audience-text">软件项目经理(PM) | 交付总监(PMO) | 交付咨询顾问</div>
       </div>
+        <div class="skill-qr">
+          <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+          <span>扫码关注</span>
+        </div>
     </div>
     <div class="skill-right">
       <div class="block block-pain">
@@ -1167,10 +1185,6 @@ html, body {
       </div>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 10: 深信 ==================== -->
@@ -1194,6 +1208,10 @@ html, body {
         <div class="audience-label">目标用户</div>
         <div class="audience-text">客户成功经理(CSM) | CS总监/VP</div>
       </div>
+        <div class="skill-qr">
+          <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+          <span>扫码关注</span>
+        </div>
     </div>
     <div class="skill-right">
       <div class="block block-pain">
@@ -1225,10 +1243,6 @@ html, body {
       </div>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 11: Section Divider 2 ==================== -->
@@ -1259,10 +1273,6 @@ html, body {
       <span style="font-size:13px;color:#8E8B6A;background:rgba(142,139,106,0.08);border:1px solid rgba(142,139,106,0.15);border-radius:20px;padding:8px 18px;display:inline-block;">🔒 以下技能为私有仓库，如需试用请联系树懒老K</span>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 12: 深筹 ==================== -->
@@ -1285,6 +1295,10 @@ html, body {
         <div class="audience-label">目标用户</div>
         <div class="audience-text">计划经理 | 车间计划员 | 快消品肉制品行业</div>
       </div>
+        <div class="skill-qr">
+          <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+          <span>扫码关注</span>
+        </div>
     </div>
     <div class="skill-right">
       <div class="block block-pain">
@@ -1317,10 +1331,6 @@ html, body {
       </div>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 13: 深驭 ==================== -->
@@ -1344,6 +1354,10 @@ html, body {
         <div class="audience-label">目标用户</div>
         <div class="audience-text">生产计划员/PMC主管/运营总监/财务经理 | HMLV多品种小批量制造企业</div>
       </div>
+        <div class="skill-qr">
+          <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+          <span>扫码关注</span>
+        </div>
     </div>
     <div class="skill-right">
       <div class="block block-pain">
@@ -1375,10 +1389,6 @@ html, body {
       </div>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 14: 深算 ==================== -->
@@ -1401,6 +1411,10 @@ html, body {
         <div class="audience-label">目标用户</div>
         <div class="audience-text">制造业售前/实施顾问 | 销售工程师</div>
       </div>
+        <div class="skill-qr">
+          <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
+          <span>扫码关注</span>
+        </div>
     </div>
     <div class="skill-right">
       <div class="block block-pain">
@@ -1433,10 +1447,6 @@ html, body {
       </div>
     </div>
   </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
-  </div>
 </div>
 
 <!-- ==================== Slide 15: End ==================== -->
@@ -1446,18 +1456,13 @@ html, body {
     <div class="page-indicator"><span class="current">16</span> / 16</div>
   </div>
   <div class="end-content">
-    <img src="sloth-avatar.jpg" alt="树懒老K" class="end-avatar" onerror="this.style.display='none'">
     <div class="end-slogan">慢一点，深一度</div>
     <div class="end-brand">树懒老K · AI技能矩阵</div>
-    <div class="end-qr">
-      <img src="assets/qrcode.jpg" alt="二维码" onerror="this.style.display='none'">
-      <span>扫码关注树懒老K · 获取更多 AI 技能</span>
+    <div class="end-qr" style="margin-top:20px;">
+      <img src="assets/qrcode.jpg" alt="二维码" onerror="this.style.display='none'" style="width:160px;height:160px;border-radius:12px;border:2px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);padding:6px;">
+      <span style="font-size:14px;color:rgba(255,255,255,0.5);margin-top:12px;">扫码关注树懒老K · 获取更多 AI 技能</span>
     </div>
     <div class="end-hint">价值环技能全部开源 · 行业方案私有仓库可申请试用 · Powered by QoderWork</div>
-  </div>
-  <div class="fixed-qrcode">
-    <img src="assets/qrcode.jpg" alt="" onerror="this.style.display='none'">
-    <span>扫码关注</span>
   </div>
 </div>
 
